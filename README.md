@@ -1,4 +1,4 @@
-## How to perform initial QC of your sequencing data?
+## How to perform an initial QC of your sequencing data?
 
 Enter the data directory and make yourself familar with the files. 
 Usually there should be one or two directories containing all your .fastq/.fq sequencing files (more information about this format here: https://en.wikipedia.org/wiki/FASTQ_format) before and after cleaning, respectively. In most cases the files are compressed (.gz). Additionaly, there should be some kind of Readme file with specific information about the received data and eventually a design file, translating file names into your sample names.
@@ -86,8 +86,8 @@ DATABASE        Sequence     /path/to/your/indexed/sequence
 ##### Start fastq-screen
 
 ```bash
-./fastq_screen_v0.11.1/fastq_screen --outdir ./reports/clean-screen/ ./data/Clean/*.fq.gz
-./fastq_screen_v0.11.1/fastq_screen --outdir ./reports/raw-screen/ ./data/Raw/*.fq.gz
+./fastq_screen_v0.11.1/fastq_screen --outdir ./reports/clean-screen/ ./data/clean/*.fq.gz
+./fastq_screen_v0.11.1/fastq_screen --outdir ./reports/raw-screen/ ./data/raw/*.fq.gz
 ```
 
 ##### Summarize the reports with multiqc
