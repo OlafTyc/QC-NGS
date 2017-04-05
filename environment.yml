@@ -1,0 +1,9 @@
+name: QC
+channels:
+  - bioconda
+dependencies:
+  - fastqc
+  - multiqc
+  - bwa
+  - bowtie
+  - bowtie2
