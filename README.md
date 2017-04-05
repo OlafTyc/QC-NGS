@@ -48,7 +48,7 @@ fastqc -o ./reports/clean/ -t 12 ./data/clean/*.fastq	#please ajust the path to 
 fastqc -o ./reports/raw/ -t 12 ./data/raw/*.fastq	#please ajust the path to your reads, acoordingly
 ```
 
-#### Identify contaminants in your raw and (cleaned sequencing) reads with Fast-screen.
+#### Identify contaminants in your raw and (cleaned sequencing) reads with Fastq-screen.
 
 Fast-screen will use bowtie2 by default to align your data. Optional you can use BWA or bowtie but you will have to unable this option in the fastq_screen.conf file and to index the databases accordingly. 
 
@@ -62,7 +62,7 @@ At the moment Fast-screen will screen the following sources of possible contamin
 
 If you miss anything in this list, please contact BU bioinformaticians and add the desired database by:
 
-1. Downloading a fasta-file with your sequence(s)and indexing your database/genome. By default, please index your genome/database with bowtie2.
+- Downloading a fasta-file with your sequence(s)and indexing your database/genome. By default, please index your genome/database with bowtie2.
 
 ```bash
 # For bowtie index the database with:
@@ -75,7 +75,7 @@ bowtie2-inspect sequence
 bwa index -p sequence ./sequence.fasta
 ```
 
-2. Adding the following text at the bottom of the fastq_screen.conf file:
+- Adding the following text at the bottom of the fastq_screen.conf file:
 
 ```bash
 ## Sequence - Soem information about the source of the sequence
