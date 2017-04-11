@@ -37,7 +37,7 @@ some_othername_16S_205_2.fq.gz: OK
 Clone the gitlab repository with the required scripts and directories.
 
 ```bash
-git clone https://gitlab.bioinf.nioo.knaw.nl/FleurG/QC-NGS.git
+git clone https://gitlab.bioinf.nioo.knaw.nl/pipelines/QC-NGS.git
 ```
 
 Enter the QC-NGS directory and create a conda environment containing all the required tools and dependecies.
