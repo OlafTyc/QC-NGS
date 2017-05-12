@@ -45,6 +45,12 @@ Enter the QC-NGS directory and create a conda environment containing all the req
 
 ```bash
 conda env create -f environment.yml
+# to inactivate the conda environment (e.g. when you finished all your analysis) type:
+source deactivate
+# to connect to your conda environment again (e.g. the next time you want to perform your QC analysis) type:
+source activate QC
+# if you do not end up in (QC) but get an error or you get into (qiime), then first execute:
+export PATH=/opt/miniconda3/bin:$PATH
 ```
 
 #### Analyse your raw (and cleaned) sequencing reads with FastQC.
