@@ -1,7 +1,13 @@
 ## How to perform an initial QC of your sequencing data?
 
 Enter the data directory and make yourself familiar with the files.
-Usually there should be one or two directories containing all your .fastq/.fq sequencing files (more information about this format here: (https://en.wikipedia.org/wiki/FASTQ_format) before and after cleaning, respectively. In most cases the files are compressed (.gz or .bz). Additionally, there should be some kind of Readme file with specific information about the received data and eventually a design file, translating file names into your sample names.
+Usually there should be one or two directories containing all your .fastq/.fq sequencing files (more information about this format here: (https://en.wikipedia.org/wiki/FASTQ_format). In most cases the files are compressed (.gz or .bz). Additionally, there should be some kind of Readme file with specific information about the received data and eventually a design file, translating file names into your sample names. In some cases the sequencing agency already performed some cleaning procedure. In this case you most likely received a directory with the data before and after cleaning, respectively. Raw (and clean) data can be treated by different filtering and trimming steps:
+- demultiplexing: Samples can be multiplexed to run in a single high-throughput sequencing instrument. To accomplish this, individual "barcode" sequences are added to each sample so they can be distinguished and sorted during data analysis. Pooling samples exponentially increases the number of samples analyzed in a single run, without drastically increasing cost or time. Usually, your sequencing agency will provide you with the demultiplexed data. If not, you can demultiplex the reads using FASTX (http://hannonlab.cshl.edu/fastx_toolkit/commandline.html#fastx_barcode_splitter_usage), IDEMP (https://github.com/yhwu/idemp) or any other tool that you prefer
+- quality trimming: Low-quality base calls are trimmed off from the 3' end of the reads. This efficiently removes poor quality portions of the reads. You can use cutadapt (http://cutadapt.readthedocs.io/en/stable/guide.html#quality-trimming), TrimGalore! or trimmomatic  (http://www.usadellab.org/cms/?page=trimmomatic)
+- adapter trimming: To execute a sequencing run, adapters are ligated to your DNA-fragments. Most of the times, your sequencing agency removes those sequences by default. If not, you can performing adapter trimming with tools like cutadapt (http://cutadapt.readthedocs.io/en/stable/index.html), FASTX (http://hannonlab.cshl.edu/fastx_toolkit/commandline.html#fastx_clipper_usage) or TrimGalore! (https://github.com/FelixKrueger/TrimGalore/blob/master/Docs/Trim_Galore_User_Guide.md)
+- length trimming: For some applications it is required to trim all reads to the same length. This can be done using FASTX (http://hannonlab.cshl.edu/fastx_toolkit/commandline.html#fastx_trimmer_usage).
+- length filtering: Quality and/or adapter trimming may result in very short sequences (sometimes as short as 0 bp). You can filter trimmed reads based on their sequence length. This is to reduce the size of the output file and to avoid crashes of alignment programs which require sequences with a certain minimum length. You can use cutadapt (http://cutadapt.readthedocs.io/en/stable/guide.html#filtering-reads) or TrimGalore!.
+- quality filtering: You can filter reads based on overall read-quality. You can use FASTX (http://hannonlab.cshl.edu/fastx_toolkit/commandline.html#fastq_quality_filter_usage).
 
 ### Check, if you downloaded the files correctly
 
@@ -45,11 +51,14 @@ Enter the QC-NGS directory and create a conda environment containing all the req
 
 ```bash
 conda env create -f environment.yml
-# to inactivate the conda environment (e.g. when you finished all your analysis) type:
+# to inactivate the conda environment type:
+# (e.g. when you finished all your analysis)
 source deactivate
-# to connect to your conda environment again (e.g. the next time you want to perform your QC analysis) type:
+# to connect to your conda environment again type:
+# (e.g. the next time you want to perform your QC analysis)
 source activate QC
-# if you do not end up in (QC) but get an error or you get into (qiime), then first execute:
+# if you do not end up in (QC) but get an error
+# or you get into (qiime), then first execute:
 export PATH=/opt/miniconda3/bin:$PATH
 ```
 
