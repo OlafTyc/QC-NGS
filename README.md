@@ -75,7 +75,7 @@ fastqc -o ./reports/raw/ -t 12 ./data/raw/*.fastq
 
 #### Identify contaminants in your raw and (cleaned sequencing) reads with Fastq-screen.
 
-Fast-screen will use bowtie2 by default to align your data. Optional you can use BWA or bowtie but you will have to unable this option in the fastq_screen.conf file and to index the databases accordingly.
+Fast-screen will use bowtie2 by default to align your data. Optional you can use BWA or bowtie by adding the --aligner flag.
 
 At the moment Fast-screen will screen the following sources of possible contaminations:
 - vectors
@@ -112,8 +112,8 @@ DATABASE        Sequence     /path/to/your/indexed/sequence
 
 ```bash
 cd ./fastq_screen_v0.11.1
-./fastq_screen --outdir ../reports/clean-screen/ ../data/clean/*.fq.gz
-./fastq_screen --outdir ../reports/raw-screen/ ../data/raw/*.fq.gz
+./fastq_screen --outdir ../reports/clean-screen/ ../data/clean/*.fq.gz #add --aligner bowtie or --aligner bwa, if you do not want to use bowtie (default)
+./fastq_screen --outdir ../reports/raw-screen/ ../data/raw/*.fq.gz #add --aligner bowtie or --aligner bwa, if you do not want to use bowtie (default)
 ```
 
 ##### Summarize the reports with multiqc
