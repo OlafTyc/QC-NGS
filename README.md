@@ -80,9 +80,9 @@ You can run several files in one directory at once by using the asterix symbol. 
 
 ```bash
 # please adjust the path to your reads, accordingly
-fastqc -o ./reports/clean/ -t 12 ./data/clean/*.fastq
+fastqc -o ./reports/clean/ -t 12 ./data/clean/*.fastq.gz
 # please ajdust the path to your reads, accordingly
-fastqc -o ./reports/raw/ -t 12 ./data/raw/*.fastq
+fastqc -o ./reports/raw/ -t 12 ./data/raw/*.fastq.gz
 ```
 
 ##### Identify contaminants in your raw and (cleaned sequencing) reads with Fastq-screen.
@@ -124,8 +124,8 @@ DATABASE        Sequence     /path/to/your/indexed/sequence
 
 ```bash
 cd ./fastq_screen_v0.11.1
-./fastq_screen --outdir ../reports/clean-screen/ ../data/clean/*.fq.gz #add --aligner bowtie or --aligner bwa, if you do not want to use bowtie (default)
-./fastq_screen --outdir ../reports/raw-screen/ ../data/raw/*.fq.gz #add --aligner bowtie or --aligner bwa, if you do not want to use bowtie (default)
+./fastq_screen --outdir ../reports/clean-screen/ ../data/clean/*.fastq.gz #add --aligner bowtie or --aligner bwa, if you do not want to use bowtie (default)
+./fastq_screen --outdir ../reports/raw-screen/ ../data/raw/*.fastq.gz #add --aligner bowtie or --aligner bwa, if you do not want to use bowtie (default)
 ```
 
 ##### Summarize the reports with multiqc
