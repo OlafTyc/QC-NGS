@@ -56,7 +56,7 @@ Clone the gitlab repository with the required scripts and directories. If you ar
 
 ```bash
 # replace <user-name> by your own NIOO login-name, e.g FleurG
-git clone https://<user-name>@gitlab.bioinf.nioo.knaw.nl/tutorials/QC-NGS.git
+git clone https://gitlab.bioinf.nioo.knaw.nl/tutorials/QC-NGS.git
 ```
 
 Enter the QC-NGS directory and create a conda environment containing all the required tools and dependencies.
