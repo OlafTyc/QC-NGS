@@ -3,24 +3,6 @@
 Enter the data directory and make yourself familiar with the files.
 Usually there should be one or two directories containing all your .fastq/.fq sequencing files (more information about this format [here](https://en.wikipedia.org/wiki/FASTQ_format)). In most cases the files are compressed (.gz or .bz). Additionally, there should be some kind of Readme file with specific information about the received data and eventually a design file, translating file names into your sample names. In some cases the sequencing agency already performed some cleaning procedure. In this case you most likely received a directory with the data before and after cleaning, respectively. Raw (and clean) data can be treated by different filtering and trimming steps:
 
-##### Demultiplexing
-Samples can be multiplexed to run in a single high-throughput sequencing instrument. To accomplish this, individual "barcode" sequences are added to each sample so they can be distinguished and sorted during data analysis. Pooling samples exponentially increases the number of samples analyzed in a single run, without drastically increasing cost or time. Usually, your sequencing agency will provide you with the demultiplexed data. If not, you can demultiplex the reads using [FASTX](http://hannonlab.cshl.edu/fastx_toolkit/commandline.html#fastx_barcode_splitter_usage), [IDEMP](https://github.com/yhwu/idemp) or any other tool that you prefer
-
-##### Quality trimming
-Low-quality base calls are trimmed off from the 3' end of the reads. This efficiently removes poor quality portions of the reads. You can use [cutadapt](http://cutadapt.readthedocs.io/en/stable/guide.html#quality-trimming), TrimGalore! or [trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
-
-##### Adapter trimming
-To execute a sequencing run, adapters are ligated to your DNA-fragments. Most of the times, your sequencing agency removes those sequences by default. If not, you can performing adapter trimming with tools like [cutadapt](http://cutadapt.readthedocs.io/en/stable/index.html), [FASTX](http://hannonlab.cshl.edu/fastx_toolkit/commandline.html#fastx_clipper_usage) or [TrimGalore!](https://github.com/FelixKrueger/TrimGalore/blob/master/Docs/Trim_Galore_User_Guide.md)
-
-##### Length trimming
-For some applications it is required to trim all reads to the same length. This can be done using [FASTX](http://hannonlab.cshl.edu/fastx_toolkit/commandline.html#fastx_trimmer_usage).
-
-##### Length filtering
-Quality and/or adapter trimming may result in very short sequences (sometimes as short as 0 bp). You can filter trimmed reads based on their sequence length. This is to reduce the size of the output file and to avoid crashes of alignment programs which require sequences with a certain minimum length. You can use [cutadapt](http://cutadapt.readthedocs.io/en/stable/guide.html#filtering-reads) or TrimGalore!.
-
-##### Quality filtering
-You can filter reads based on overall read-quality. You can use [FASTX](http://hannonlab.cshl.edu/fastx_toolkit/commandline.html#fastq_quality_filter_usage).
-
 ## Check, if you downloaded the files correctly
 
 Some sequencing agencies send md5 checksums to check data integrity after downloading your data, e.g. the md5 checksum should be identical before and after the download. Otherwise your downloaded file might be corrupt.
@@ -152,3 +134,29 @@ multiqc -d -n report_all ./reports
   - Duplicate sequences: This counts the degree of duplication for every sequence in a library and creates a plot showing the relative number of sequences with different degrees of duplication. If you encounter high duplication reads and did not execute a targeted study like amplicon sequencing, your data might be affected by a PCR bias.
   - Overrepresented sequences: This plots the total proportion of sequences which make up more than 0.1% of the total.
   - Adapter content: The plot shows a cumulative percentage count of the proportion of your library which has seen each of the adapter sequences at each position.
+
+## How to proceed if quality should be improved?
+
+##### Demultiplexing
+Samples can be multiplexed to run in a single high-throughput sequencing instrument. To accomplish this, individual "barcode" sequences are added to each sample so they can be distinguished and sorted during data analysis. Pooling samples exponentially increases the number of samples analyzed in a single run, without drastically increasing cost or time. Usually, your sequencing agency will provide you with the demultiplexed data. If not, you can demultiplex the reads using [FASTX](http://hannonlab.cshl.edu/fastx_toolkit/commandline.html#fastx_barcode_splitter_usage), [IDEMP](https://github.com/yhwu/idemp) or any other tool that you prefer
+
+##### Quality trimming
+Low-quality base calls are trimmed off from the 3' end of the reads. This efficiently removes poor quality portions of the reads. You can use [cutadapt](http://cutadapt.readthedocs.io/en/stable/guide.html#quality-trimming), TrimGalore! or [trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
+
+##### Adapter trimming
+To execute a sequencing run, adapters are ligated to your DNA-fragments. Most of the times, your sequencing agency removes those sequences by default. If not, you can performing adapter trimming with tools like [cutadapt](http://cutadapt.readthedocs.io/en/stable/index.html), [FASTX](http://hannonlab.cshl.edu/fastx_toolkit/commandline.html#fastx_clipper_usage) or [TrimGalore!](https://github.com/FelixKrueger/TrimGalore/blob/master/Docs/Trim_Galore_User_Guide.md)
+
+##### Length trimming
+For some applications it is required to trim all reads to the same length. This can be done using [FASTX](http://hannonlab.cshl.edu/fastx_toolkit/commandline.html#fastx_trimmer_usage).
+
+##### Length filtering
+Quality and/or adapter trimming may result in very short sequences (sometimes as short as 0 bp). You can filter trimmed reads based on their sequence length. This is to reduce the size of the output file and to avoid crashes of alignment programs which require sequences with a certain minimum length. You can use [cutadapt](http://cutadapt.readthedocs.io/en/stable/guide.html#filtering-reads) or TrimGalore!.
+
+##### Quality filtering
+You can filter reads based on overall read-quality. You can use [FASTX](http://hannonlab.cshl.edu/fastx_toolkit/commandline.html#fastq_quality_filter_usage).
+
+##### More programs
+
+- seqtk
+- fastp
+- Trimmomatic
