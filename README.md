@@ -85,7 +85,9 @@ fastqc -o ./reports/clean/ -t 12 ./data/clean/*.fastq.gz
 fastqc -o ./reports/raw/ -t 12 ./data/raw/*.fastq.gz
 ```
 
-##### Identify contaminants in your raw and (cleaned sequencing) reads with Fastq-screen.
+Move on with the tutorial by executing Fastq-screen. You can scip the section about making a fastq-screen database, when using the pre-existing databases is sufficient.
+
+#####  Make a fastq-screen database
 
 Fast-screen will use bowtie2 by default to align your data. Optional you can use BWA or bowtie by adding the --aligner flag.
 
@@ -120,7 +122,7 @@ bwa index -p sequence ./sequence.fasta
 DATABASE        Sequence     /path/to/your/indexed/sequence
 ```
 
-##### Start fastq-screen
+##### Start fastq-screen to identify contaminants in your raw and (cleaned sequencing) reads
 
 ```bash
 cd ./fastq_screen_v0.11.1
