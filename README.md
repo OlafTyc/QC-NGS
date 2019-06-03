@@ -1,6 +1,11 @@
+# QC-NGS tutorial
+
+This tutorial will guide you through the process of generating and reading a QC report. It uses the software packages [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), [fastq-screen](https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen/) and [multiQC](https://multiqc.info/), that will be installed by using `conda`.
+Please cite all used software appropriately.
+
 # How to perform an initial QC of your sequencing data?
 
-Enter the data directory and make yourself familiar with the files.
+Enter the data directory and make yourself familiar with the files that you received from your NGS-sequencing provider.
 Usually there should be one or two directories containing all your .fastq/.fq sequencing files (more information about this format [here](https://en.wikipedia.org/wiki/FASTQ_format)). In most cases the files are compressed (.gz or .bz). Additionally, there should be some kind of Readme file with specific information about the received data and eventually a design file, translating file names into your sample names. In some cases the sequencing agency already performed some cleaning procedure. In this case you most likely received a directory with the data before and after cleaning, respectively. Raw (and clean) data can be treated by different filtering and trimming steps:
 
 ## Check, if you downloaded the files correctly
@@ -34,11 +39,10 @@ some_othername_16S_205_2.fq.gz: OK
 
 ## Run FastQC and Fast-screen to generate various statistics about your sequencing reads
 
-Clone the gitlab repository with the required scripts and directories. If you are a new user, then first log in with your NIOO credentials on Gitlab (https://gitlab.bioinf.nioo.knaw.nl). This will activate your gitlab account and will allow you to clone repositories.
+Clone this github repository with the required scripts and directories.
 
 ```bash
-# replace <user-name> by your own NIOO login-name, e.g FleurG
-git clone https://gitlab.bioinf.nioo.knaw.nl/tutorials/QC-NGS.git
+git clone https://github.com/nioo-knaw/QC-NGS.git
 ```
 
 Enter the QC-NGS directory and create a conda environment containing all the required tools and dependencies.
@@ -51,9 +55,6 @@ source deactivate
 # to connect to your conda environment again type:
 # (e.g. the next time you want to perform your QC analysis)
 source activate QC
-# if you do not end up in (QC) but get an error
-# or you get into (qiime), then first execute:
-export PATH=/opt/miniconda3/bin:$PATH
 ```
 
 ##### Analyse your raw (and cleaned) sequencing reads with FastQC.
@@ -73,6 +74,8 @@ Move on with the tutorial by executing Fastq-screen. You can scip the section ab
 
 Fast-screen will use bowtie2 by default to align your data. Optional you can use BWA or bowtie by adding the --aligner flag.
 
+Please add all required databases to your system and adjust the database path in the fastq-screen config file.
+
 At the moment Fast-screen will screen the following sources of possible contaminations:
 - vectors
 - adapters
@@ -81,7 +84,7 @@ At the moment Fast-screen will screen the following sources of possible contamin
 - Homo sapiens
 - Arabidopsis thaliana
 
-If you miss anything in this list, please contact BU bioinformaticians and add the desired database by:
+If you miss anything in this list, please add them by:
 
 - Downloading a fasta-file with your sequence(s)and indexing your database/genome. By default, please index your genome/database with bowtie2.
 
